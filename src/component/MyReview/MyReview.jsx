@@ -1,11 +1,51 @@
-import React from 'react';
-import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import SignleReviewTr from './SignleReviewTr';
 
 
 const MyReview = () => {
   const data = useLoaderData()
-  console.log(data);
+  const [dataDelt, setDataDelt] = useState(false)
+  const [orders, setOrder] = useState([]); 
+
+
+  const handleDelete = id => {
+    const proceed = window.confirm('Are you sure, you want to cancel this order')
+    if (proceed) {
+        fetch(`http://localhost:5000/review/${id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.deletedCount
+                  > 0) {
+                      alert('deleted successfully')
+                    setDataDelt(true)
+                    console.log(dataDelt)
+                    const remainging = orders.filter(odr => odr._id !== id);
+                    setOrder(remainging)
+                }})
+              }
+            }
+  
+
+
+            const handleApprovingStatus =( id, message) => {
+              fetch(`http://localhost:5000/review/${id}`, {
+                  method: 'PATCH',
+                  headers: {
+                      'content-type': 'application/json'
+                  },
+                  body: JSON.stringify({ message: message })
+              })
+                  .then(res => res.json())
+                  .then(data => {
+                      console.log(data);                     
+                  })
+          }
+      
+
   return (
     <div>
     <h1>My Review</h1>
@@ -17,20 +57,14 @@ const MyReview = () => {
       <tr>
         <th>sl</th>
         <th>Service Name</th>
-        <th className='w-4/6  '>Review</th>
+        <th className='w-4/6'>Review</th>
         <th>edit</th>
         <th>delete</th>
       </tr>
     </thead>
     <tbody>
     {
-        data.map((review, i) => (<tr>
-          <th>{i+1}</th>
-          <td>{review.service}</td>
-          <td className='flex flex-wrap '>{review.message}</td>
-          <td> <AiFillEdit /> </td>
-          <td><AiFillDelete /> </td>
-        </tr>))
+        data.map((review, i) => <SignleReviewTr review ={review} key = {review._id} i= {i} handleDelete= {handleDelete} handleApprovingStatus={handleApprovingStatus}/> )
     }
       
      

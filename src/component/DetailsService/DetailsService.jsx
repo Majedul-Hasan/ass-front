@@ -8,10 +8,10 @@ import Review from '../Review/Review';
 const DetailsService = () => {
     const navigate =  useNavigate();
     const { user } = useContext(AuthContext)
-    const { _id, img, name, description, price } = useLoaderData();
+    const { _id, img, name, description, price, } = useLoaderData();
     const [reviews, setReviews] = useState();
     const notify = () => toast.success('Successfully Added')
-    console.log(user)
+  
 
     const handleSubmit = event => {
         event.preventDefault();
