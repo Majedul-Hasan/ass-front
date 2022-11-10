@@ -20,6 +20,20 @@ const Register = () => {
 
     const navigate = useNavigate();
 
+    const UserSaveToData = async (userData) => {
+        fetch('http://localhost:5000/users' , {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData)
+    })
+    .then(res => res.json())
+       .then(data => {
+        console.log(data);
+       } )
+}
+
     const handleRegisterSubmit = event => {
         event.preventDefault();
         const form = event.target;
@@ -36,7 +50,7 @@ const Register = () => {
                 navigate('/')
             })
             .catch(error => console.error(error))
-
+            UserSaveToData({name,photourl, email, password})
     }
 
 

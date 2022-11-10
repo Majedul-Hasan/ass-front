@@ -1,9 +1,8 @@
-import React from 'react';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
+import { FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { FaMotorcycle, FaUser } from 'react-icons/fa'
+import logoImg from '../../assets/logoImg.png';
 import { AuthContext } from '../../Context/ContextProvider';
-import logoImg from '../../assets/logoImg.png'
 
 const Navbar = () => {
 
@@ -33,6 +32,7 @@ const Navbar = () => {
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
                     <Link to='/home'>Home</Link>
+                    
                     <Link to='/faq' className='px-3'>FAQ</Link>
                     <Link to='/blog' className='px-3'>Blog</Link>
                 </ul>
@@ -41,8 +41,9 @@ const Navbar = () => {
                 <div className="navbar-end naver-style">
                     {user?.uid ?
                         <>
-                            <span className=''>{user?.displayName}</span>
-                            <button onClick={handleLogOut} className=' mx-2 lg:px-8 lg:py-2 sm:px-5 sm:py-2 lg:font-bold border lg:rounded-3xl sm:rounded-lg text-white bg-red-400 hover:bg-white hover:border-red-400 hover:text-red-400 shadow-lg shadow-amber-500/50"'>Log Out</button>
+                            <Link to="/myreview">MyReview</Link>
+                            <Link to='/addnewservice' className='px-3'>Addnewservice</Link>
+                            <button onClick={handleLogOut} className=' mx-2 lg:px-8 lg:py-2 sm:px-5 sm:py-2 lg:font-bold border lg:rounded-3xl sm:rounded-lg text-white bg-red-400 hover:bg-white hover:border-red-400 hover:text-red-400 shadow-lg shadow-amber-500/50'>Log Out</button>
                         </>
                         :
                         <div><Link to='/login' className=" mx-2 px-8 py-2 font-bold border rounded-3xl text-white bg-red-400 hover:bg-white hover:border-red-400 hover:text-red-400 shadow-lg shadow-red-500/50">Login</Link>

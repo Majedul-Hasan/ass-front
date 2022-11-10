@@ -1,14 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import AllDetailsService from "../component/AllDetailsService/AllDetailsService";
+import AddNewService from "../component/AddNewService/AddNewService";
 import DetailsService from "../component/DetailsService/DetailsService";
 import FAQ from "../component/FAQ/FAQ";
-import Hero from "../component/Hero/Hero";
 import Home from "../component/Home/Home";
 import Login from "../component/Login/Login";
-import PriveteRoute from "../component/PriveteRoute/PriveteRoute";
+import MyReview from "../component/MyReview/MyReview";
 import Register from "../component/Register/Register";
 import Services from "../component/Services/Services";
-import ThreeService from "../component/ThreeService/ThreeService";
 import Main from "../layout/Main";
 
 const routes = createBrowserRouter([
@@ -36,8 +34,17 @@ const routes = createBrowserRouter([
             },
             {
                 path: '/AllDetailsService/:id',
-                element: <AllDetailsService />,
+                element: <DetailsService />,
                 loader: ({ params }) => fetch(`https://server-site-reviw-website-farhan-sharif.vercel.app/allservices/${params.id}`)
+            },
+            {
+                path: '/addnewservice',
+                element: <AddNewService/>
+            },
+            {
+                path: '/myreview',
+                element: <MyReview />,
+                loader: () =>fetch(`http://localhost:5000/review`)
             },
             {
                 path: '/faq',

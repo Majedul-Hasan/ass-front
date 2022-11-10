@@ -15,8 +15,6 @@ const SignleService = ({ service }) => {
                     <img src={img} alt="" className="object-cover object-center w-full rounded-t-md h-72 dark:bg-gray-500" />
                 </PhotoView>
             </PhotoProvider>
-
-
             <div className="flex flex-col justify-between p-2 space-y-8">
                 <div className="space-y-2">
                     <h2 className="text-3xl font-semibold tracking-wide">Service: {name}</h2>
@@ -26,6 +24,8 @@ const SignleService = ({ service }) => {
                 <Link to={`/DetailsService/${_id}`}>
                     <button type="button" className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md bg-red-400 text-white">View Details</button></Link>
             </div>
+
+
         </div>
     );
 };
