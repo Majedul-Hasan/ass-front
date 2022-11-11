@@ -17,6 +17,7 @@ const DetailsService = () => {
         event.preventDefault();
         const form = event.target;
         const message = form.message.value;
+        console.log(message)
 
         if (message===''){
             return alert('please enter a description')
@@ -25,10 +26,11 @@ const DetailsService = () => {
             service: _id,
             customer: user?.displayName,
             uid: user?.uid,
+            createdAt: new Date().getTime(),
             message
         }       
 
-        fetch('https://server-site-reviw-website-farhan-sharif.vercel.app/review', {
+        fetch('http://localhost:5000/addreview', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -73,7 +75,9 @@ const DetailsService = () => {
             {/* Review item  */}
             <div>
                 {
-                    reviews?.filter(review => review.service === _id)?.map(revi => <Review key={revi._id} revi={revi} />)
+                    reviews?.filter(review => review.service === _id)
+                    ?.sort((a, b) => b.createdAt -a.createdAt)
+                    ?.map(revi => <Review key={revi._id} revi={revi} />)
                 }
             </div>
             <div className='my-12'>
